@@ -1,0 +1,40 @@
+/* Left Arrow */
+.custom-arrow.slick-prev {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 5px; /* Margin to the left */
+  border: 1px solid #F7A582;
+  color: #F7A582; /* Color of the arrow outline */
+  border-radius: 50%;
+  background-color: #F7A582;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Added color transition */
+  z-index: 1; /* Ensure the arrow is displayed over slides */
+}
+
+/* Right Arrow */
+.custom-arrow.slick-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 5px; /* Margin to the right */
+  border: 1px solid #F7A582;
+  background-color: #F7A582;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Added color transition */
+}
+
+/* Hover Effect */
+.custom-arrow:hover {
+  background-color: #F7A582; /* Hover background color */
+  color: white; /* Arrow color on hover */
+  border-color: #F7A582; /* Hover outline color */
+}
