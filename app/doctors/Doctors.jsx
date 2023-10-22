@@ -11,6 +11,13 @@ const Doctors = () => {
         Our Expert Doctors
       </h1>
 
+      <p className="text-base text-[#3B3A3A] text-center">
+        Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+        accusantium doloremque laudantium, totam rem aperiam, eaque ipsa <br />{" "}
+        quae ab illo inve ntore veritatis et quasi architecto beatae vitae dicta
+        sunt explicabo.
+      </p>
+
       <div className="flex flex-col items-center gap-4 mt-10 sm:flex-row sm:justify-center">
         {doctorData.map((doctor) => (
           <DoctorCards key={doctor.id} doctor={doctor} />
