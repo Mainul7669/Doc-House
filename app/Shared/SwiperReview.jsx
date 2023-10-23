@@ -33,7 +33,7 @@ const SwiperReview = () => {
   };
 
   return (
-    <div className="pb-10">
+    <div>
       <Slider {...settings} className="mx-4 lg:mx-[230px] pb-4">
         {/* Slide 1 */}
 

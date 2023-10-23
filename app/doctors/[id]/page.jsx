@@ -84,12 +84,12 @@ const SingleDoctor = () => {
         </div>
 
         <div className="hero min-h-full">
-          <div className="bg-white hero-content mb-8 lg:mb-20">
+          <div className="bg-white hero-content mb-8 lg:mb-20 rounded-md lg:mx-0 mx-4">
             <Tabs
               selectedIndex={selectedIndex}
               onSelect={(index) => setSelectedIndex(index)}
             >
-              <TabList className="flex flex-wrap gap-2 rounded-xl border-b-2 w-full justify-center">
+              <TabList className="flex flex-wrap gap-2 rounded-xl border-b-2 w-fit justify-center">
                 {["Overview", "Locations", "Reviews", "Business Hours"].map(
                   (tabTitle, index) => (
                     <Tab
@@ -112,104 +112,192 @@ const SingleDoctor = () => {
                 <div className="content mt-6 text-[#3B3A3A]">
                   <h2 className="font-bold text-[#3B3A3A] text-lg">About Me</h2>
                   <p className="text-sm">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                    ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                    Duis aute irure dolor in reprehenderit in voluptate velit
-                    esse cillum dolore eu fugiat nulla pariatur. Excepteur sint
-                    occaecat cupidatat non proident, sunt in culpa qui officia
-                    deserunt mollit anim id est laborum.
+                    {name} is a renowned dentist with over 15 years of
+                    experience in the field of dentistry. He is passionate about
+                    providing comprehensive dental care and has a special
+                    interest in pediatric dentistry and orthodontics. Dr. Doe is
+                    committed to delivering the highest quality of dental
+                    services to all his patients, ensuring their comfort and
+                    satisfaction throughout their treatment.
                   </p>
 
-                  <div className="py-4">
-                    <h2 className="text-lg font-bold">Education</h2>
-                    <ul className="list-disc list-inside ml-4 mt-6">
-                      <li>
-                        <span className="font-bold">
-                          American Dental Medical University
-                        </span>
-                        <ul className="list-inside ml-4 mt-2">
-                          <li>BDS</li>
-                          <li>1998 - 2003</li>
+                  <div className="flex flex-col md:flex-row md:gap-16">
+                    <div className="mb-8 md:mb-0 md:w-1/2">
+                      <div className="py-4">
+                        <h2 className="text-lg font-bold">Education</h2>
+                        <ul className="list-disc list-inside ml-4 mt-6">
+                          <li>
+                            <span className="font-bold">
+                              American Dental Medical University
+                            </span>
+                            <ul className="list-inside ml-4 mt-2">
+                              <li>BDS</li>
+                              <li>1998 - 2003</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              {" "}
+                              American Dental Medical University
+                            </span>
+                            <ul className="list-inside ml-4 mt-2">
+                              <li>MDS</li>
+                              <li>2003 - 2005</li>
+                            </ul>
+                          </li>
                         </ul>
-                      </li>
-                      <li>
-                        <span className="font-bold">
-                          {" "}
-                          American Dental Medical University
-                        </span>
-                        <ul className="list-inside ml-4 mt-2">
-                          <li>MDS</li>
-                          <li>2003 - 2005</li>
+                      </div>
+                      <div className="py-4">
+                        <h2 className="text-lg font-bold">Work & Experience</h2>
+                        <ul className="list-disc list-inside ml-4 mt-6">
+                          <li>
+                            <span className="font-bold">
+                              Glowing Smiles Family Dental Clinic
+                            </span>
+                            <ul className=" list-inside ml-4 mt-2">
+                              <li>2010 - Present (5 years)</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Comfort Care Dental Clinic
+                            </span>
+                            <ul className=" list-inside ml-4 mt-2">
+                              <li>2007 - 2010 (3 years)</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              {" "}
+                              Dream Smile Dental Practice
+                            </span>
+                            <ul className=" list-inside ml-4 mt-2">
+                              <li>2005 - 2007 (2 years)</li>
+                            </ul>
+                          </li>
                         </ul>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="py-4">
-                    <h2 className="text-lg font-bold">Work & Experience</h2>
-                    <ul className="list-disc list-inside ml-4 mt-6">
-                      <li>
-                        <span className="font-bold">
-                          Glowing Smiles Family Dental Clinic
-                        </span>
-                        <ul className=" list-inside ml-4 mt-2">
-                          <li>2010 - Present (5 years)</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <span className="font-bold">
-                          Comfort Care Dental Clinic
-                        </span>
-                        <ul className=" list-inside ml-4 mt-2">
-                          <li>2007 - 2010 (3 years)</li>
-                        </ul>
-                      </li>
-                      <li>
-                        <span className="font-bold">
-                          {" "}
-                          Dream Smile Dental Practice
-                        </span>
-                        <ul className=" list-inside ml-4 mt-2">
-                          <li>2005 - 2007 (2 years)</li>
-                        </ul>
-                      </li>
-                    </ul>
-                  </div>
+                      </div>
 
-                  <div className="py-4">
-                    <h2 className="text-lg font-bold">Services</h2>
-                    <ul className="list-disc list-inside ml-4 mt-6">
-                      <li>Tooth cleaning</li>
-                      <li>Root Canal Therapy</li>
-                      <li>Implants</li>
-                      <li>Composite Bonding</li>
-                      <li>Fissure Sealants</li>
-                      <li>Surgical Extractions</li>
-                    </ul>
+                      <div className="py-4">
+                        <h2 className="text-lg font-bold">Services</h2>
+                        <ul className="list-disc list-inside ml-4 mt-6">
+                          <li>Tooth cleaning</li>
+                          <li>Root Canal Therapy</li>
+                          <li>Implants</li>
+                          <li>Composite Bonding</li>
+                          <li>Fissure Sealants</li>
+                          <li>Surgical Extractions</li>
+                        </ul>
+                      </div>
+                    </div>
+
+                    <div className="md:w-1/2">
+                      <div className="py-4">
+                        <h2 className="text-lg font-bold">Awards </h2>
+                        <ul className=" list-inside ml-10 mt-6">
+                          <li>July 2019</li>
+                        </ul>
+                        <ul className="list-disc list-inside ml-4">
+                          <li>
+                            <span className="font-bold">
+                              Humanitarian Award
+                            </span>
+                            <ul className="list-inside ml-4 mt-2">
+                              <li>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Proin a ipsum tellus. Interdum
+                                et malesuada fames ac ante ipsum primis in
+                                faucibus. <br />
+                              </li>
+                              <li className="mt-8">March 2011</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              Certificate for International Volunteer Service
+                            </span>
+                            <ul className="list-inside ml-4 mt-2">
+                              <li>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Proin a ipsum tellus. Interdum
+                                et malesuada fames ac ante ipsum primis in
+                                faucibus.
+                              </li>
+                              <li>May 2008</li>
+                            </ul>
+                          </li>
+                          <li>
+                            <span className="font-bold">
+                              The Dental Professional of The Year Award
+                            </span>
+                            <ul className="list-inside ml-4 mt-2">
+                              <li>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit. Proin a ipsum tellus. Interdum
+                                et malesuada fames ac ante ipsum primis in
+                                faucibus.
+                              </li>
+                            </ul>
+                          </li>
+                        </ul>
+                      </div>
+
+                      <div className="py-4 ml-4">
+                        <h2 className="text-lg font-bold">Specializations</h2>
+                        <ul className="list-disc list-inside ml-4 mt-6">
+                          <li>Children Care</li>
+                          <li>Dental Care</li>
+                          <li>Oral and Maxillofacial Surgery</li>
+                          <li>Orthodontist</li>
+                          <li>Periodontist</li>
+                          <li>Prosthodontics</li>
+                        </ul>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </TabPanel>
+
               <TabPanel>
-                <div className="content">
-                  <img
-                    className="mt-4 mx-auto lg:mx-0"
-                    src="/Rectangle 11.png"
-                    alt=""
-                    width="100%"
-                    height="350px"
-                  />
+                <div className="content mt-6 text-[#3B3A3A]">
+                  <h2 className="font-bold text-[#3B3A3A] text-lg">
+                    Locations
+                  </h2>
+                  <p className="text-sm">
+                  {name}  practices at multiple locations across the
+                    city, including his primary clinic in the downtown area,
+                    along with satellite offices in the north and south suburbs.
+                    His widespread presence allows patients to access his
+                    services conveniently from various parts of the city.
+                  </p>
                 </div>
               </TabPanel>
+
               <TabPanel>
-                <div className="content">
-                  <img
-                    className="mt-4 mx-auto lg:mx-0 rounded-lg"
-                    src="/oralSurgery.jpeg"
-                    alt=""
-                    width="100%"
-                    height="350px"
-                  />
+                <div className="content mt-6 text-[#3B3A3A]">
+                  <h2 className="font-bold text-[#3B3A3A] text-lg">Reviews</h2>
+                  <p className="text-sm">
+                    Patients have consistently praised Dr. John Doe for his
+                    exceptional dental expertise and caring demeanor. His gentle
+                    approach and attention to detail have garnered him numerous
+                    positive reviews, making him one of the most sought-after
+                    dentists in the region.
+                  </p>
+                </div>
+              </TabPanel>
+
+              <TabPanel>
+                <div className="content mt-6 text-[#3B3A3A]">
+                  <h2 className="font-bold text-[#3B3A3A] text-lg">
+                    Business Hours
+                  </h2>
+                  <p className="text-sm">
+                  {name}'s clinics are open from Monday to Friday, from
+                    8:00 AM to 6:00 PM, and on Saturdays from 9:00 AM to 3:00
+                    PM. He ensures flexible scheduling options for his patients
+                    to accommodate their busy lifestyles and urgent dental
+                    needs.
+                  </p>
                 </div>
               </TabPanel>
             </Tabs>

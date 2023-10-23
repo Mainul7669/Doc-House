@@ -76,7 +76,7 @@ const Services = () => {
             <div className="content">
               <img
                 className="mt-6 mx-auto lg:mx-0 rounded-lg"
-                src="/oralSurgery.jpeg"
+                src="https://www.interdent.com/gentle-dental/wp-content/uploads/sites/2/2017/10/bigstock-Shot-of-a-young-woman-with-den-13183415.jpg"
                 alt=""
                 width="480px"
                 height="350px"
