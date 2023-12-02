@@ -1,16 +1,60 @@
 "use client";
 
+
 import AppointmentNavbar from "@app/Shared/AppointmentNavbar";
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import { useState } from 'react';
 import Footer from "@components/Footer";
+import AppointmentTabs from "@app/Shared/AppointmentTabs";
 
 const Page = () => {
-  const [value, onChange] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
+  // List of dates for which services are not available
+  const unavailableDates = [
+    new Date(2024, 0, 7), // January  (Month 0 represents January)
+    new Date(2024, 0, 9), // January  (Month 0 represents January)
+    new Date(2024, 0, 12), // January 12, 2023 (Month 0 represents January)
+    new Date(2024, 0, 14), // January  (Month 0 represents January)
+    new Date(2024, 0, 20), // January  (Month 0 represents January)
+    new Date(2024, 0, 24), // January 12, 2023 (Month 0 represents January)
+    new Date(2023, 1, 12), // February  (Month 1 represents February)
+    new Date(2023, 2, 12), // March  (Month 2 represents March)
+    new Date(2023, 3, 12), // April  (Month 3 represents April)
+    new Date(2023, 11, 3), // December  (Month 11 represents December)
+    new Date(2023, 11, 5), // December  (Month 11 represents December)
+    new Date(2023, 11, 17), // December  (Month 11 represents December)
+    new Date(2023, 11, 22), // December  (Month 11 represents December)
+    new Date(2023, 11, 31), // December  (Month 11 represents December)
+    
+    // Add more dates here
+  ];
+  
+
+  // Function to handle calendar date change
+  const handleDateChange = (date) => {
+    setSelectedDate(date);
+  };
+
+  // Function to check if the selected date is in the unavailable dates list
+  const isDateUnavailable = (date) => {
+    return unavailableDates.some((unavailableDate) =>
+      isSameDate(unavailableDate, date)
+    );
+  };
+
+ // Function to compare dates (ignoring time)
+const isSameDate = (date1, date2) => {
+    return (
+      date1.getDate() === date2.getDate() &&
+      date1.getMonth() === date2.getMonth() &&
+      date1.getFullYear() === date2.getFullYear()
+    );
+  };
 
   return (
-    <div>
+    <div className="bg-white">
       <AppointmentNavbar />
 
       <div
@@ -20,14 +64,17 @@ const Page = () => {
         }}
       >
       
+
+
       <div className="flex flex-col lg:gap-0 gap-16 md:flex-row items-center justify-center">
-  <div className="w-full md:w-1/2 flex justify-center ">
-    <Calendar
-      onChange={onChange}
-      value={value}
-      className="shadow-lg rounded-lg border-none"
-    />
-  </div>
+      <div className="w-full md:w-1/2 flex justify-center">
+        <Calendar
+          onChange={handleDateChange} // Update the onChange function
+          value={selectedDate}
+          className="shadow-lg rounded-lg border-none"
+          tileDisabled={({ date }) => isDateUnavailable(date)}
+        />
+      </div>
   <div className="w-[350px] md:w-1/2">
     <img src="/chair 1.png" alt="" className="lg:max-w-lg" />
   </div>
@@ -35,117 +82,22 @@ const Page = () => {
 
 
 
+
+
 <div className="text-center mt-10 lg:mt-24">
-  <h2 className="text-[#F7A582]">Available Services on April 30, 2022</h2>
-   <h1 className="text-black text-3xl font-bold mt-4">Please select a service</h1>
-</div>
+        <h2 className="text-[#F7A582] text-lg font-semibold">
+          {isDateUnavailable(selectedDate)
+            ? "Services Not Available"
+            : `Available Services on ${selectedDate.toLocaleDateString()}`}
+        </h2>
+        <h1 className="text-black text-3xl font-bold mt-4">Please select a service</h1>
+      </div>
 
       </div>
 
 
-<div className=" bg-white">
- 
- <div className="flex flex-wrap justify-center items-center lg:mx-28">
- <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#FFECEE] p-3">
-        <img
-        className="h-10 w-10 rounded-full object-cover"
-        src="/006-broken-tooth.png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Teeth Orthodontics</p>
-      </div>
-    </div>
-  </div>
 
-  {/* Repeat the above structure for the next five cards, updating the image source and text accordingly */}
-
-  <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#FFFCF9] p-3">
-        <img
-        className="h-10 w-10 rounded-full object-cover"
-        src="/Flat.png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Cosmetic Dentisty</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#FFECEE] p-3">
-        <img
-        className="w-10 object-cover"
-        src="/Group (1).png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Teeth Cleaning</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#37D4E91A] p-3">
-        <img
-        className="h-10 w-10 rounded-full object-cover"
-        src="/Group (2).png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Cavity Protection</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#FFECEE] p-3">
-        <img
-        className="h-10 w-10 rounded-full object-cover"
-        src="/003-smile.png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Pediatric Dental</p>
-      </div>
-    </div>
-  </div>
-
-  <div className="w-full md:w-1/2 lg:w-1/3 p-4">
-    <div className="flex items-center bg-white rounded-lg shadow-md p-4 gap-6">
-    <div className="rounded-lg bg-[#FFC1071A] p-3">
-        <img
-        className="h-10 w-10 rounded-full object-cover"
-        src="/Group 34963.png"
-        alt="Image 1"
-      />
-    </div>
-      <div>
-        <p className="font-bold text-lg text-black">Oral Surgery</p>
-      </div>
-    </div>
-  </div>
- </div>
-
-  
-  
-    
-
-  
-</div>
-
+<AppointmentTabs/>
 
 
 <Footer/>

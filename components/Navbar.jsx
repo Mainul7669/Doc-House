@@ -77,6 +77,11 @@ const Navbar = () => {
             </Link>
           </li>
           <li>
+            <Link href="/dashboard" className="text-white">
+              Dashboard
+            </Link>
+          </li>
+          <li>
             <Link href="/signin" className="text-white">
               <button className="hover:bg-[#F7A582] hover:py-2 hover:px-6 text-white font-semibold rounded">
                 Login
