@@ -293,7 +293,7 @@ const AppointmentTabs = ({ selectedDate }) => {
             Available slots for Teeth Orthodontics.
           </h1>
 
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {OrthodonticsData.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
@@ -330,7 +330,7 @@ const AppointmentTabs = ({ selectedDate }) => {
             Available slots for Cosmetic Dentistry
           </h1>
 
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {DentistryData.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
@@ -367,7 +367,7 @@ const AppointmentTabs = ({ selectedDate }) => {
             Available slots for Teeth Cleaning
           </h1>
 
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {CleaningData.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
@@ -403,7 +403,7 @@ const AppointmentTabs = ({ selectedDate }) => {
           <h1 className="text-black text-3xl font-bold text-center mt-14 mb-8">
             Available slots for Cavity Protection{" "}
           </h1>
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {CavityProtection.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
@@ -440,7 +440,7 @@ const AppointmentTabs = ({ selectedDate }) => {
             Available slots for Pediatric Dental{" "}
           </h1>
 
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {PediatricDental.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
@@ -477,7 +477,7 @@ const AppointmentTabs = ({ selectedDate }) => {
             Available slots for Oral Surgery{" "}
           </h1>
 
-          <div className="flex flex-wrap -mx-2 mb-16">
+          <div className="flex flex-wrap mb-16">
             {OralSurgery.map((item, index) => (
               <div key={index} className="w-full md:w-1/2 lg:w-1/3 px-2 mb-4">
                 <div className="max-w-xs mx-auto rounded overflow-hidden shadow-md text-center py-10">
