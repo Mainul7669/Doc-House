@@ -6,7 +6,18 @@ import "react-tabs/style/react-tabs.css";
 import "../Styles/app.css";
 import Modal from "./Modal";
 
-const AppointmentTabs = () => {
+const AppointmentTabs = ({ selectedDate }) => {
+
+// console.log(selectedDate);
+
+  const [selectedService, setSelectedService] = useState(null); // State to store selected service
+
+  // Function to handle the click on "Book Appointment" button
+  const handleBookAppointment = (service) => {
+    setSelectedService(service); // Set the selected service
+    openModal(); // Open the modal
+  };
+
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -304,7 +315,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -341,7 +352,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -378,7 +389,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -414,7 +425,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -451,7 +462,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -488,7 +499,7 @@ const AppointmentTabs = () => {
                     </p>
                   </div>
                  <div key={index} className="px-6 py-4">
-            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={openModal}>
+            <button className="bg-[#F7A582] hover:bg-[#f3baa2] text-white font-bold py-2 px-4 rounded" onClick={() => handleBookAppointment(item)}>
               Book Appointment
             </button>
           </div>
@@ -502,9 +513,16 @@ const AppointmentTabs = () => {
       
       </Tabs>
 
-    {/* Include the Modal component */}
-    {isModalOpen && <Modal closeModal={closeModal} />}
 
+    {/* Include the Modal component */}
+    {isModalOpen && (
+  <Modal
+    closeModal={closeModal}
+    selectedDate={selectedDate} // Pass selectedDate here
+    selectedService={selectedService} // Pass selectedService or null here
+  />
+)}
+ 
     </div>
   );
 };

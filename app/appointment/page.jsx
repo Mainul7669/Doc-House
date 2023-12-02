@@ -32,6 +32,7 @@ const Page = () => {
   ];
   
 
+
   // Function to handle calendar date change
   const handleDateChange = (date) => {
     setSelectedDate(date);
@@ -97,7 +98,7 @@ const isSameDate = (date1, date2) => {
 
 
 
-<AppointmentTabs/>
+<AppointmentTabs selectedDate={selectedDate}/>
 
 
 <Footer/>
