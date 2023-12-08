@@ -40,4 +40,7 @@
 }
 
 
-
+.table-pin-cols tr th{
+  background-color: #FFFFFF;
+  padding: 20px;
+}

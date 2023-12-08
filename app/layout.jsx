@@ -1,7 +1,4 @@
-
 import "./globals.css";
-
-
 
 export const metadata = {
   title: "Doc House",
@@ -9,22 +6,15 @@ export const metadata = {
 };
 
 const RootLayout = ({ children }) => (
-  <html lang='en'>
-   <html lang="en">
+  <html lang="en">
+    <html lang="en">
       <body>
-      <div>
-        <main>
-        {children}
-        </main>
-      </div>
-        </body>
+        <div>
+          <main>{children}</main>
+        </div>
+      </body>
     </html>
   </html>
 );
 
 export default RootLayout;
-
-
-
-
-
