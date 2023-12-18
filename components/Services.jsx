@@ -8,7 +8,7 @@ const Services = () => {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <div className="container mx-auto lg:mx-32 mt-20">
+    <div className=" mx-auto lg:mx-32 mt-20">
       <div className="lg:flex">
         {/* Left Column (Image) */}
         <div className="px-4 py-6 lg:py-0">

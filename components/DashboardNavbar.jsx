@@ -1,9 +1,25 @@
+"use client";
+
+import { usePathname } from "next/navigation";
+import Link from "next/link";
+import { useContext } from "react";
+import { AuthContext } from "./providers/AuthProvider";
 
 const DashboardNavbar = () => {
+  const pathname = usePathname();
+
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+  
   return (
     <div>
-
-
       <div className="drawer lg:drawer-open z-[9999]">
         <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content flex flex-col items-center justify-center absolute right-3 bottom-2 ">
@@ -38,36 +54,111 @@ const DashboardNavbar = () => {
           ></label>
           <ul className="menu p-4 w-80 min-h-full bg-[#FFFFFF] font-semibold text-lg text-[#898989]">
             {/* Sidebar content here */}
+
+            <div className="flex justify-between items-center lg:hidden mb-5 mt-3">
+
+{user ? ( 
+<>
+
+  <button
+    onClick={handleLogOut}
+    className=" text-black bg-gray-200 btn-ghost p-2 font-semibold rounded-lg"
+  >
+    Logout
+  </button>
+
+<div>
+    <img className="w-16 rounded-xl" src={user?.photoURL} />
+  </div>
+  </>
+) : (
+<>
+
+</>
+
+)}
+</div>
+
             {/* For users */}
             <li>
-              <a>My Appointments</a>
+              <Link
+                className={`link ${
+                  pathname === "/dashboard/myappointments" ? " active" : "no-underline hover:text-black hover:font-bold"
+                }`}
+                href="/dashboard/myappointments"
+              >
+                My Appointments
+              </Link>
             </li>
             <li>
               <a>My Reviews</a>
             </li>
             <li>
-              <a>My History</a>
+              <Link
+                className={`link ${
+                  pathname === "/dashboard/myhistory" ? "active" : "no-underline hover:text-black hover:font-bold"
+                }`}
+                href="/dashboard/myhistory"
+              >
+                My History
+              </Link>
             </li>
             <li>
-              <a>Home</a>
+              <Link
+                className={`link ${pathname === "/" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
+                href="/"
+              >
+                Home
+              </Link>
             </li>
 
             {/* For admin */}
 
             <li>
-              <a>Dashboard</a>
+              <Link
+                className={`link ${pathname === "/dashboard" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
+                href="/dashboard"
+              >
+                Dashboard
+              </Link>
             </li>
             <li>
-              <a>All Users</a>
+              <Link
+                className={`link ${
+                  pathname === "/dashboard/allusers" ? "active" : "no-underline hover:text-black hover:font-bold"
+                }`}
+                href="/dashboard/allusers"
+              >
+                All Users
+              </Link>
             </li>
             <li>
-              <a>Add a Doctor</a>
+              <Link
+                className={`link ${
+                  pathname === "/dashboard/adddoctor" ? "active" : "no-underline hover:text-black hover:font-bold"
+                }`}
+                href="/dashboard/adddoctor"
+              >
+                Add a Doctor
+              </Link>
             </li>
             <li>
-              <a>Manage Doctors</a>
+              <Link
+                className={`link ${
+                  pathname === "/dashboard/managedoctors" ? "active" : "no-underline hover:text-black hover:font-bold"
+                }`}
+                href="/dashboard/managedoctors"
+              >
+                Manage Doctors
+              </Link>
             </li>
             <li>
-              <a>Home</a>
+              <Link
+                className={`link ${pathname === "/" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
+                href="/"
+              >
+                Home
+              </Link>
             </li>
           </ul>
         </div>

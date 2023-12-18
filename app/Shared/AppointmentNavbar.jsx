@@ -67,8 +67,8 @@ const AppointmentNavbar = () => {
             </Link>
           </li>
           <li>
-            <Link href="/about" className="text-white">
-              About
+            <Link href="/dashboard" className="text-white">
+              Dashboard
             </Link>
           </li>
           <li>

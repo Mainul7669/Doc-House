@@ -1,66 +1,58 @@
-// components/Layout.js
+"use client";
 
 import DashboardNavbar from "@components/DashboardNavbar";
+import { AuthContext } from "@components/providers/AuthProvider";
+import { useContext } from "react";
 
 const Layout = ({ children }) => {
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
     <div>
       <div className="navbar bg-[#07332F] text-white">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Doc House</a>
+          {/* <h1>{user.displayName}</h1> */}
         </div>
-        <div className="flex-none hidden lg:block">
-          <button className="btn text-black bg-white btn-circle hover:bg-gray-300 mr-2 lg:mr-4">
-            <div className="indicator">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"
-                />
-              </svg>
-              <span className="badge badge-xs badge-primary indicator-item"></span>
-            </div>
+        <div className="lg:flex items-center hidden">
+
+        {user ? ( 
+        <>
+
+          <button
+            onClick={handleLogOut}
+            className=" text-black bg-white btn-ghost p-2 font-semibold hover:text-white mr-2 lg:mr-4 rounded-lg"
+          >
+            Logout
           </button>
-          <div className="dropdown dropdown-end lg:mr-2">
-            <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
-              <div className="w-10 rounded-full">
-                <img src="/images/stock/photo-1534528741775-53994a69daeb.jpg" />
-              </div>
-            </label>
-            <ul
-              tabIndex={0}
-              className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
-            >
-              <li>
-                <a className="justify-between">
-                  Profile
-                  <span className="badge">New</span>
-                </a>
-              </li>
-              <li>
-                <a>Settings</a>
-              </li>
-              <li>
-                <a>Logout</a>
-              </li>
-            </ul>
+
+        <div className="lg:mr-2">
+            <img className="w-16 rounded-xl" src={user?.photoURL} />
           </div>
+          </>
+       ) : (
+        <>
+
+        </>
+
+       )}
         </div>
       </div>
-     <div className="lg:flex gap-10  bg-[#F1F5F9]">
-     <DashboardNavbar />
-     <div className="mt-10">
-     <main>{children}</main>
-     </div>
-     </div>
+
+      <div className="lg:flex gap-10  bg-[#F1F5F9]">
+        <DashboardNavbar />
+        <div className="mt-10">
+          <main>{children}</main>
+        </div>
+      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import AuthProvider from "@components/providers/AuthProvider";
 import "./globals.css";
 
 export const metadata = {
@@ -10,7 +11,9 @@ const RootLayout = ({ children }) => (
     <html lang="en">
       <body>
         <div>
+          <AuthProvider>
           <main>{children}</main>
+          </AuthProvider>
         </div>
       </body>
     </html>

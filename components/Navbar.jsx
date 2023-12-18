@@ -1,9 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Link from "next/link";
+import { AuthContext } from "./providers/AuthProvider";
 
 const Navbar = () => {
+
+  const { user, logout } = useContext(AuthContext);
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
@@ -17,7 +30,7 @@ const Navbar = () => {
         <div className="flex justify-between items-center w-full md:w-auto">
           <Link
             href="/"
-            className="text-white text-2xl font-semibold mb-4 md:mb-0"
+            className="text-white text-2xl font-semibold mb-4 md:mb-0 "
           >
             <div className="flex items-center gap-2">
             <svg
@@ -62,31 +75,38 @@ const Navbar = () => {
           } top-[6rem] flex min-w-fit pr-4 flex-col bg-slate-200 pb-3 pt-2 transition-all duration-300 dark:bg-slate-900 lg:static lg:w-[unset] lg:flex-row lg:bg-transparent lg:pb-0 lg:pt-0 dark:lg:bg-transparent lg:gap-10 gap-2`}
         >
           <li>
-            <Link href="/" className="text-white">
+            <Link href="/" className="text-white hover:text-[#F7A582] font-semibold">
               Home
             </Link>
           </li>
+
           <li>
-            <Link href="/about" className="text-white">
-              About
-            </Link>
-          </li>
-          <li>
-            <Link href="/appointment" className="text-white">
+            <Link href="/appointment" className="text-white hover:text-[#F7A582] font-semibold">
               Appointment
             </Link>
           </li>
           <li>
-            <Link href="/dashboard" className="text-white">
+            <Link href="/dashboard" className="text-white hover:text-[#F7A582] font-semibold">
               Dashboard
             </Link>
           </li>
           <li>
-            <Link href="/signin" className="text-white">
-              <button className="hover:bg-[#F7A582] hover:py-2 hover:px-6 text-white font-semibold rounded">
+           {user ? (
+            <>
+             <button  onClick={handleLogOut} className="hover:text-[#F7A582] text-white font-semibold rounded">
+                Logout
+              </button>
+            </>
+              ) : (
+                <>
+                <Link href="/signin" className="text-white">
+              <button className="hover:text-[#F7A582] text-white font-semibold rounded">
                 Login
               </button>
             </Link>
+           
+              </>
+           )}
           </li>
         </ul>
       </div>
