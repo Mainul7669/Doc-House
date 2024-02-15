@@ -13,9 +13,11 @@ const banner = () => {
               Lorem Ipsum is simply dummy text they are printing typesetting{" "}
               <br /> has been the industry's standard.
             </p>
-            <button className="mt-4 px-6 py-3 bg-[#F7A582] text-white rounded-lg hover:bg-orange-300 transition duration-300">
+           <a href="/appointment">
+           <button className="mt-4 px-6 py-3 bg-[#F7A582] text-white rounded-lg hover:bg-orange-300 transition duration-300">
               All Service
             </button>
+           </a>
           </div>
 
           <div className="flex-1 mt-6 lg:mt-0">

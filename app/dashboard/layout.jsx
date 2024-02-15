@@ -1,5 +1,6 @@
 "use client";
 
+import PrivateRoute from "@app/Shared/PrivateRoute";
 import DashboardNavbar from "@components/DashboardNavbar";
 import { AuthContext } from "@components/providers/AuthProvider";
 import { useContext } from "react";
@@ -17,6 +18,7 @@ const Layout = ({ children }) => {
 
   return (
     <div>
+      <PrivateRoute>
       <div className="navbar bg-[#07332F] text-white">
         <div className="flex-1">
           <a className="btn btn-ghost normal-case text-xl">Doc House</a>
@@ -46,13 +48,14 @@ const Layout = ({ children }) => {
        )}
         </div>
       </div>
-
+      
       <div className="lg:flex gap-10  bg-[#F1F5F9]">
         <DashboardNavbar />
         <div className="mt-10">
           <main>{children}</main>
         </div>
       </div>
+      </PrivateRoute>
     </div>
   );
 };

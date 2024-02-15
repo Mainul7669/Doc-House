@@ -3,9 +3,13 @@
 import React, { useContext, useState } from "react";
 import Link from "next/link";
 import { AuthContext } from "@components/providers/AuthProvider";
+import { useRouter } from "next/navigation";
+import Swal from "sweetalert2";
 
 const SignUp = () => {
   const { createUser, updateUserProfile } = useContext(AuthContext);
+
+  const router = useRouter();
 
   const [formData, setFormData] = useState({
     fullname: "",
@@ -23,18 +27,17 @@ const SignUp = () => {
     });
   };
 
-
   const handleSubmit = (e) => {
     e.preventDefault();
-  
+
     const { fullname, email, password, image } = formData;
-  
+
     // Use createUser method to create a user
     createUser(email, password)
       .then((res) => {
         const loggedUser = res.user;
         console.log(loggedUser);
-  
+
         // Update user profile with provided image URL
         return updateUserProfile(fullname, image); // Update profile with fullname and image URL
       })
@@ -44,14 +47,33 @@ const SignUp = () => {
           email: email,
           image: image,
         };
-        console.log(savedUser);
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(savedUser),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.insertedId) {
+              Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "User Created Successfully",
+                showConfirmButton: false,
+                timer: 1500,
+              });
+
+              // Redirect to home page after successful signup
+              router.push("/"); // Assuming "/" is your home page route
+            }
+          });
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
-
 
   return (
     <div className="min-h-screen flex flex-col md:flex-row">
@@ -163,4 +185,3 @@ const SignUp = () => {
 };
 
 export default SignUp;
-

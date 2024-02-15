@@ -3,12 +3,13 @@
 import { AuthContext } from "@components/providers/AuthProvider";
 import Link from "next/link";
 import { useContext, useState } from "react";
+import { useRouter } from 'next/navigation';
 
 const SignIn = () => {
 
   const { signIn } = useContext(AuthContext);
 
-
+  const router = useRouter();
   
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -20,6 +21,8 @@ const SignIn = () => {
     signIn(email, password).then((result) => {
       const user = result.user;
       console.log(user);
+       // Redirect to home page after successful signup
+       router.push("/"); // Assuming "/" is your home page route
     });
 
   };

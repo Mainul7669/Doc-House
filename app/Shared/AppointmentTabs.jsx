@@ -46,18 +46,21 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Teeth Orthodontics",
       description: "8:00 AM - 9:00 AM",
       bgColor: "bg-[#01D0FB0D]",
+      price: "15$",
     },
     {
       imageSrc: "/002-decayed.png",
       title: "Teeth Orthodontics",
       description: "10:00 AM - 11:00 AM",
       bgColor: "bg-[#D700000D]",
+      price: "15$",
     },
     {
       imageSrc: "/003-bacteria.png",
       title: "Teeth Orthodontics",
       description: "5:00 PM - 6:00 PM",
       bgColor: "bg-[#FFF5C60D]",
+      price: "15$",
     },
     // Add the data for the rest of the cards similarly
   ];
@@ -68,12 +71,14 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Teeth Cleaning",
       description: "10.05 AM - 11:30 AM",
       bgColor: "bg-[#FD47550D]",
+      price: "20$",
     },
     {
       imageSrc: "/001-dental-checkup.png",
       title: "Teeth Cleaning",
       description: "10.05 AM - 11:30 AM",
       bgColor: "bg-[#FD47550D]",
+      price: "20$",
     },
 
     // Add the data for the rest of the cards similarly
@@ -84,18 +89,21 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Cosmetic Dentistry",
       description: "10.05 AM - 11:30 AM",
       bgColor: "bg-[#DF646E0D]",
+      price: "25$",
     },
     {
       imageSrc: "/005-tooth-whitening.png",
       title: "Cosmetic Dentistry",
       description: "10.05 AM - 11:30 AM",
       bgColor: "bg-[#DF646E0D]",
+      price: "25$",
     },
     {
       imageSrc: "/005-tooth-whitening.png",
       title: "Cosmetic Dentistry",
       description: "10.05 AM - 11:30 AM",
       bgColor: "bg-[#DF646E0D]",
+      price: "25$",
     },
 
     // Add the data for the rest of the cards similarly
@@ -107,18 +115,21 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Cavity Protection",
       description: "8:00 AM - 9:00 AM",
       bgColor: "bg-[#01D0FB0D]",
+      price: "10$",
     },
     {
       imageSrc: "/002-decayed.png",
       title: "Cavity Protection",
       description: "10:00 AM - 11:00 AM",
       bgColor: "bg-[#D700000D]",
+      price: "10$",
     },
     {
       imageSrc: "/002-decayed.png",
       title: "Cavity Protection",
       description: "5:00 PM - 6:00 PM",
       bgColor: "bg-[#FFF5C60D]",
+      price: "10$",
     },
     // Add the data for the rest of the cards similarly
   ];
@@ -129,18 +140,21 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Pediatric Dental",
       description: "8:00 AM - 9:00 AM",
       bgColor: "bg-[#01D0FB0D]",
+      price: "5$",
     },
     {
       imageSrc: "/003-bacteria.png",
       title: "Pediatric Dental",
       description: "10:00 AM - 11:00 AM",
       bgColor: "bg-[#D700000D]",
+      price: "5$",
     },
     {
       imageSrc: "/003-bacteria.png",
       title: "Pediatric Dental",
       description: "5:00 PM - 6:00 PM",
       bgColor: "bg-[#FFF5C60D]",
+      price: "5$",
     },
     // Add the data for the rest of the cards similarly
   ];
@@ -151,18 +165,21 @@ const AppointmentTabs = ({ selectedDate }) => {
       title: "Oral Surgery",
       description: "8:00 AM - 9:00 AM",
       bgColor: "bg-[#01D0FB0D]",
+      price:"50$",
     },
     {
       imageSrc: "/Group 34963.png",
       title: "Oral Surgery",
       description: "10:00 AM - 11:00 AM",
       bgColor: "bg-[#D700000D]",
+      price:"50$",
     },
     {
       imageSrc: "/Group 34963.png",
       title: "Oral Surgery",
       description: "5:00 PM - 6:00 PM",
       bgColor: "bg-[#FFF5C60D]",
+      price:"50$",
     },
     // Add the data for the rest of the cards similarly
   ];
@@ -520,6 +537,7 @@ const AppointmentTabs = ({ selectedDate }) => {
     closeModal={closeModal}
     selectedDate={selectedDate} // Pass selectedDate here
     selectedService={selectedService} // Pass selectedService or null here
+    price={selectedService ? selectedService.price : null} // Pass the price here
   />
 )}
  

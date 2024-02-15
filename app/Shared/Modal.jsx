@@ -1,25 +1,68 @@
-import { useState } from "react";
+import { AuthContext } from "@components/providers/AuthProvider";
+import { useState, useEffect, useContext } from "react";
+import Swal from "sweetalert2";
 
-const Modal = ({ closeModal, selectedDate, selectedService }) => {
+const Modal = ({ closeModal, selectedDate, selectedService, price }) => {
   const [fullName, setFullName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+
+  const { user } = useContext(AuthContext); // Access user object from the AuthContext
+  useEffect(() => {
+    // Set the email state to the current user's email
+    if (user) {
+      setEmail(user.email);
+    }
+  }, [user]); // Update the email state when the user object changes
+
+
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
     // Here, you can handle the form submission with the collected data
     // For example, you can use fullName, phoneNumber, email, selectedDate, and selectedService
+    console.log("Treatment:", selectedService ? selectedService.title : "");
+    console.log("Price:", selectedService ? selectedService.price : "");
     console.log("Selected Date:", selectedDate ? selectedDate.toLocaleDateString() : "");
     console.log("Selected Description:", selectedService ? selectedService.description : "");
     console.log("Full Name:", fullName);
     console.log("Phone Number:", phoneNumber);
     console.log("Email:", email);
-  
-    // You can perform further actions like submitting the data to a server, etc.
+
+    // Send data to the server
+    fetch("http://localhost:5000/appointments", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        fullName: fullName,
+        phoneNumber: phoneNumber,
+        email: email,
+        selectedService: selectedService ? selectedService.title : "",
+        selectedPrice: selectedService ? selectedService.price : "",
+        selectedDate: selectedDate ? selectedDate.toLocaleDateString() : "",
+        selectedDescription: selectedService ? selectedService.description : "",
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.insertedId) {
+          Swal.fire({
+            title: "Success!",
+            text: "Appointment Added Successfully",
+            icon: "success",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+        }
+      })
+      .catch((error) => console.error("Error adding appointment:", error));
+
     // Reset the form fields
     setFullName("");
     setPhoneNumber("");
-    setEmail("");
     // Close the modal
     closeModal();
   };
@@ -37,28 +80,24 @@ const Modal = ({ closeModal, selectedDate, selectedService }) => {
           </button>
           {/* Display the selected service title */}
           <h3 className="font-bold text-lg text-black">
-            {selectedService ? selectedService.title : ""}
+            {selectedService ? selectedService.title : ""} : {selectedService ? selectedService.price : ""} 
           </h3>
-          {/* Display the selected date and description */}
-         
           {/* Input fields for Full Name, Phone Number, and Email */}
           <div className="flex flex-col py-4 gap-4">
             <input
               className="block w-full rounded-md border-0 py-1.5 text-black font-semibold bg-[#E6E6E6] shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 px-4"
               type="text"
-              defaultValue= {selectedDate ? selectedDate.toLocaleDateString() : ""}
+              defaultValue={selectedDate ? selectedDate.toLocaleDateString() : ""}
               readOnly
               required
             />
-            
             <input
               className="block w-full rounded-md border-0 py-1.5 text-black text-md bg-[#E6E6E6] shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 font-semibold px-4"
               type="text"
-              defaultValue= {selectedService ? selectedService.description : ""}
+              defaultValue={selectedService ? selectedService.description : ""}
               readOnly
               required
             />
-
             <input
               className="block w-full rounded-md border-0 py-1.5 text-black text-md bg-[#E6E6E6] shadow-sm placeholder:text-gray-400 sm:text-sm sm:leading-6 font-semibold px-4"
               type="text"

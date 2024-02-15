@@ -105,9 +105,11 @@ const Services = () => {
             beatae vitae dicta sunt explicabo.
           </p>
 
-          <button className="btn btn-outline text-[#F7A582] hover:text-white hover:bg-[#F7A582] mt-4 mx-auto lg:mx-0 block sm:inline-block">
+        <a href="/appointment">
+        <button className="btn btn-outline text-[#F7A582] hover:text-white hover:bg-[#F7A582] mt-4 mx-auto lg:mx-0 block sm:inline-block">
             More Details
           </button>
+        </a>
         </div>
       </div>
     </div>

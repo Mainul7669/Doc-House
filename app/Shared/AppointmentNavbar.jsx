@@ -1,13 +1,56 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Link from "next/link";
+import { AuthContext } from "@components/providers/AuthProvider";
 
 const AppointmentNavbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
+  };
+
+
+  const { user, logout } = useContext(AuthContext);
+  const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+
+  console.log(isAdmin);
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+      fetchUserData().then(userData => {
+        if (userData) {
+          const isAdminUser = userData.find(userData => userData.email === user.email && userData.role === 'admin');
+          setIsAdmin(!!isAdminUser);
+        }
+      });
+    }
+  }, [user]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch('http://localhost:5000/users');
+      if (!response.ok) {
+        throw new Error('Failed to fetch user data');
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error('Error fetching user data:', error);
+      return null;
+    }
+  };
+
+  const handleLogOut = () => {
+    logout()
+      .then(() => {})
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (
@@ -66,22 +109,35 @@ const AppointmentNavbar = () => {
               Home
             </Link>
           </li>
-          <li>
-            <Link href="/dashboard" className="text-white">
-              Dashboard
-            </Link>
-          </li>
+
           <li>
             <Link href="/appointment" className="text-white">
               Appointment
             </Link>
           </li>
           <li>
-            <Link href="/signin" className="text-white">
-              <button className="hover:text-[#F7A582]  text-white font-semibold rounded">
-                Login
+            {isAdmin ? (
+              <Link href="/dashboard" className="text-white hover:text-[#F7A582] font-semibold">
+                Dashboard
+              </Link>
+            ) : (
+              <Link href="/dashboard/myappointments" className="text-white hover:text-[#F7A582] font-semibold">
+                My Appointments
+              </Link>
+            )}
+          </li>
+          <li>
+            {user ? (
+              <button onClick={handleLogOut} className="hover:text-[#F7A582] text-white font-semibold rounded">
+                Logout
               </button>
-            </Link>
+            ) : (
+              <Link href="/signin" className="text-white">
+                <button className="hover:text-[#F7A582] text-white font-semibold rounded">
+                  Login
+                </button>
+              </Link>
+            )}
           </li>
         </ul>
         

@@ -1,19 +1,45 @@
 "use client";
 
-import { useState } from 'react';
-import appointmentsData from "@utils/appointmentsData";
+import { AuthContext } from '@components/providers/AuthProvider';
+import { useContext, useEffect, useState } from 'react';
 
 const AppointmentDetails = ({ params }) => {
   const { id } = params;
 
-  const selectedAppointment = appointmentsData.find(
-    (appointment) => String(appointment.id) === String(id)
-  );
-
+  const [email, setEmail] = useState("");
+  const [appointments, setAppointments] = useState([]);
+  const [selectedAppointment, setSelectedAppointment] = useState(null);
   const [cardNumber, setCardNumber] = useState('');
   const [expirationDate, setExpirationDate] = useState('');
   const [cvc, setCVC] = useState('');
   const [paymentComplete, setPaymentComplete] = useState(false);
+
+  const { user } = useContext(AuthContext); // Access user object from the AuthContext
+  useEffect(() => {
+    // Set the email state to the current user's email
+    if (user) {
+      setEmail(user.email);
+    }
+  }, [user]); // Update the email state when the user object changes
+
+
+  useEffect(() => {
+    // Fetch appointments data using the fetched email
+    if(email) {
+      fetch(`http://localhost:5000/appointments?email=${email}`)
+        .then(res => res.json())
+        .then(data => setAppointments(data))
+        .catch(error => console.error('Error fetching appointments:', error));
+    }
+  }, [email]);
+
+  useEffect(() => {
+    // Find the selected appointment based on the ID
+    if (appointments.length > 0) {
+      const appointment = appointments.find(appointment => String(appointment._id) === String(id));
+      setSelectedAppointment(appointment);
+    }
+  }, [id, appointments]);
 
   const handlePayment = () => {
     // Perform payment processing here
@@ -26,14 +52,16 @@ const AppointmentDetails = ({ params }) => {
     return <p>Loading...</p>;
   }
 
+
+
   return (
     <div className="card bg-white rounded-md shadow-sm p-6 mx-auto">
       <div className='leading-10'>
-        <p>ID: {selectedAppointment.id}</p>
-        <p className="text-[#F0AA22] font-semibold">Hello, {selectedAppointment.name}</p>
-        <p className="text-black text-lg font-bold">Please Pay for {selectedAppointment.treatment}</p>
-        <p>Your appointment on <span className="text-[#F0AA22] font-semibold">{selectedAppointment.date}</span> at <span className="text-black font-semibold">{selectedAppointment.time}</span></p>
-        <p className="text-black text-lg font-bold">Please Pay: {selectedAppointment.price}</p>
+        <p>ID: {selectedAppointment._id}</p>
+        <p className="text-[#F0AA22] font-semibold">Hello, {selectedAppointment.fullName}</p>
+        <p className="text-black text-lg font-bold">Please Pay for {selectedAppointment.selectedService}</p>
+        <p>Your appointment on <span className="text-[#F0AA22] font-semibold">{selectedAppointment.selectedDate}</span> at <span className="text-black font-semibold">{selectedAppointment.selectedDescription}</span></p>
+        <p className="text-black text-lg font-bold">Please Pay: {selectedAppointment.selectedPrice}</p>
       </div>
 
       <div className="divider my-4 mx-4"></div>
@@ -80,3 +108,6 @@ const AppointmentDetails = ({ params }) => {
 };
 
 export default AppointmentDetails;
+
+
+

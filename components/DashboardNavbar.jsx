@@ -2,13 +2,47 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "./providers/AuthProvider";
 
 const DashboardNavbar = () => {
   const pathname = usePathname();
 
   const { user, logout } = useContext(AuthContext);
+
+  const [email, setEmail] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  console.log(isAdmin);
+
+  useEffect(() => {
+    if (user) {
+      setEmail(user.email);
+      fetchUserData().then((userData) => {
+        if (userData) {
+          const isAdminUser = userData.find(
+            (userData) =>
+              userData.email === user.email && userData.role === "admin"
+          );
+          setIsAdmin(!!isAdminUser);
+        }
+      });
+    }
+  }, [user]);
+
+  const fetchUserData = async () => {
+    try {
+      const response = await fetch("http://localhost:5000/users");
+      if (!response.ok) {
+        throw new Error("Failed to fetch user data");
+      }
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.error("Error fetching user data:", error);
+      return null;
+    }
+  };
 
   const handleLogOut = () => {
     logout()
@@ -17,7 +51,7 @@ const DashboardNavbar = () => {
         console.log(error);
       });
   };
-  
+
   return (
     <div>
       <div className="drawer lg:drawer-open z-[9999]">
@@ -56,110 +90,117 @@ const DashboardNavbar = () => {
             {/* Sidebar content here */}
 
             <div className="flex justify-between items-center lg:hidden mb-5 mt-3">
+              {user ? (
+                <>
+                  <button
+                    onClick={handleLogOut}
+                    className=" text-black bg-gray-200 btn-ghost p-2 font-semibold rounded-lg"
+                  >
+                    Logout
+                  </button>
 
-{user ? ( 
-<>
-
-  <button
-    onClick={handleLogOut}
-    className=" text-black bg-gray-200 btn-ghost p-2 font-semibold rounded-lg"
-  >
-    Logout
-  </button>
-
-<div>
-    <img className="w-16 rounded-xl" src={user?.photoURL} />
-  </div>
-  </>
-) : (
-<>
-
-</>
-
-)}
-</div>
-
-            {/* For users */}
-            <li>
-              <Link
-                className={`link ${
-                  pathname === "/dashboard/myappointments" ? " active" : "no-underline hover:text-black hover:font-bold"
-                }`}
-                href="/dashboard/myappointments"
-              >
-                My Appointments
-              </Link>
-            </li>
-            <li>
-              <a>My Reviews</a>
-            </li>
-            <li>
-              <Link
-                className={`link ${
-                  pathname === "/dashboard/myhistory" ? "active" : "no-underline hover:text-black hover:font-bold"
-                }`}
-                href="/dashboard/myhistory"
-              >
-                My History
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`link ${pathname === "/" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
+                  <div>
+                    <img className="w-16 rounded-xl" src={user?.photoURL} />
+                  </div>
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
 
             {/* For admin */}
 
-            <li>
-              <Link
-                className={`link ${pathname === "/dashboard" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
-                href="/dashboard"
-              >
-                Dashboard
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`link ${
-                  pathname === "/dashboard/allusers" ? "active" : "no-underline hover:text-black hover:font-bold"
-                }`}
-                href="/dashboard/allusers"
-              >
-                All Users
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`link ${
-                  pathname === "/dashboard/adddoctor" ? "active" : "no-underline hover:text-black hover:font-bold"
-                }`}
-                href="/dashboard/adddoctor"
-              >
-                Add a Doctor
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`link ${
-                  pathname === "/dashboard/managedoctors" ? "active" : "no-underline hover:text-black hover:font-bold"
-                }`}
-                href="/dashboard/managedoctors"
-              >
-                Manage Doctors
-              </Link>
-            </li>
-            <li>
-              <Link
-                className={`link ${pathname === "/" ? "active" : "no-underline hover:text-black hover:font-bold"}`}
-                href="/"
-              >
-                Home
-              </Link>
-            </li>
+            {isAdmin ? (
+              <>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/dashboard"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard"
+                  >
+                    Dashboard
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/dashboard/allusers"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard/allusers"
+                  >
+                    All Users
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/dashboard/adddoctor"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard/adddoctor"
+                  >
+                    Add a Doctor
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/dashboard/managedoctors"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard/managedoctors"
+                  >
+                    Manage Doctors
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/dashboard/myhistory"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard/myhistory"
+                  >
+                    My History
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
+                      pathname === "/"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/"
+                  >
+                    Home
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>

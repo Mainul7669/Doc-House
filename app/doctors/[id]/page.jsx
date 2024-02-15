@@ -34,7 +34,7 @@ const SingleDoctor = () => {
       <div className="container bg-[#CECECE]">
         <div className="hero min-h-screen">
           <div className="hero-content flex-col lg:flex-row bg-white rounded-md gap-8 p-5 lg:p-16 mt-24 mb-16 lg:mx-0 mx-4">
-            <img src={BigImage} alt={name} className="lg:w-1/2 rounded-md" />
+            <img src={BigImage} alt={name} className="lg:w-2/3 rounded-md" />
             <div className="card text-[#6C6B6B] lg:w-1/2">
               <h2 className="text-3xl font-bold mb-4 text-black">{name}</h2>
               <p className="text-lg mb-4">{specialization}</p>

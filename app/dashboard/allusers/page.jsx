@@ -1,15 +1,53 @@
+"use client"
+
+import React, { useState, useEffect } from 'react';
 import "../../Styles/app.css";
 
-const page = () => {
+const Page = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // Fetch users data from your API or source
+    fetch('http://localhost:5000/users')
+      .then(res => res.json())
+      .then(data => setUsers(data));
+  }, []);
+
+
+
+  // Function to handle making a user an admin
+const handleMakeAdmin = user => {
+  fetch(`http://localhost:5000/users/admin/${user._id}`, {
+    method: 'PATCH'
+  })
+  .then(res => res.json())
+  .then(data => {
+    console.log(data);
+    if (data.modifiedCount) {
+      // Fetch users data again
+      fetch('http://localhost:5000/users')
+        .then(res => res.json())
+        .then(data => setUsers(data));
+
+      Swal.fire({
+        position: 'top-end',
+        icon: 'success',
+        title: `${user.fullname} is an Admin Now`,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    }
+  })
+  .catch(error => console.error('Error making admin:', error));
+};
+
+
   return (
     <div>
-      <h1 className="text-xl font-bold text-black mb-5">All Users: 09</h1>
+      <h1 className="text-xl font-bold text-black mb-5">All Users: {users.length}</h1>
 
       <div className="overflow-x-auto card">
-        <table
-          className="table table-xs table-pin-rows table-pin-cols bg-white text-[#898989] font-semibold
-    lg:w-[850px]"
-        >
+        <table className="table table-xs table-pin-rows table-pin-cols bg-white text-[#898989] font-semibold lg:w-[850px]">
           <thead>
             <tr className="bg-[#E6E6E6] text-black">
               <th></th>
@@ -20,186 +58,27 @@ const page = () => {
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <th>01</th>
-              <td>Cy Ganderton</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>02</th>
-              <td>Hart Hagerty</td>
-              <td>
-                <button
-                  className="bg-[#07332F] py-2 px-4  rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] py-2 px-4  rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                 Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>03</th>
-              <td>Brice Swyre</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>04</th>
-              <td>Marjy Ferencz</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>05</th>
-              <td>Yancy Tear</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>06</th>
-              <td>Irma Vasilik</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>07</th>
-              <td>Meghann Durtnal</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>08</th>
-              <td>Sammy Seston</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <th>09</th>
-              <td>Meghann Durtnal</td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Make Admin
-                </button>
-              </td>
-              <td>
-                <button
-                  className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold
-         hover:bg-[#184844]"
-                >
-                  Remove User
-                </button>
-              </td>
-            </tr>
+            {users.map((user, index) => (
+              <tr key={user._id}>
+                <th>{index + 1}</th>
+                <td>{user.fullname}</td>
+                <td>
+                  <button
+                    className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold hover:bg-[#184844]"
+                    onClick={() => handleMakeAdmin(user)}
+                  >
+                    Make Admin
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="bg-[#07332F] lg:py-2 lg:px-4 p-[7px] rounded-md text-white font-semibold hover:bg-[#184844]"
+                  >
+                    Remove User
+                  </button>
+                </td>
+              </tr>
+            ))}
           </tbody>
         </table>
       </div>
@@ -207,4 +86,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Page;
