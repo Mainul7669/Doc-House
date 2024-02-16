@@ -23,7 +23,7 @@ const Page = () => {
   useEffect(() => {
     // Fetch appointments data using the fetched email
     if(email) {
-      fetch(`http://localhost:5000/appointments?email=${email}`)
+      fetch(`https://server-six-lemon.vercel.app/appointments?email=${email}`)
         .then(res => res.json())
         .then(data => setAppointments(data))
         .catch(error => console.error('Error fetching appointments:', error));

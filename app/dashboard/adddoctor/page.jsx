@@ -53,7 +53,7 @@ const AddDoctor = () => {
           photo: imgUrl
         };
   
-        fetch('http://localhost:5000/doctors', {
+        fetch('https://server-six-lemon.vercel.app/doctors', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'

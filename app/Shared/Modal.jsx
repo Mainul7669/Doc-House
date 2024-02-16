@@ -30,7 +30,7 @@ const Modal = ({ closeModal, selectedDate, selectedService, price }) => {
     console.log("Email:", email);
 
     // Send data to the server
-    fetch("http://localhost:5000/appointments", {
+    fetch("https://server-six-lemon.vercel.app/appointments", {
       method: "POST",
       headers: {
         "content-type": "application/json",

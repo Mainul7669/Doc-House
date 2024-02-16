@@ -13,7 +13,7 @@ const page = () => {
   }, []);
 
   const fetchDoctors = () => {
-    fetch('http://localhost:5000/doctors')
+    fetch('https://server-six-lemon.vercel.app/doctors')
       .then(response => response.json())
       .then(data => {
         setDoctors(data);

@@ -8,7 +8,7 @@ const Page = () => {
 
   useEffect(() => {
     // Fetch users data from your API or source
-    fetch('http://localhost:5000/users')
+    fetch('https://server-six-lemon.vercel.app/users')
       .then(res => res.json())
       .then(data => setUsers(data));
   }, []);
@@ -17,7 +17,7 @@ const Page = () => {
 
   // Function to handle making a user an admin
 const handleMakeAdmin = user => {
-  fetch(`http://localhost:5000/users/admin/${user._id}`, {
+  fetch(`https://server-six-lemon.vercel.app/users/admin/${user._id}`, {
     method: 'PATCH'
   })
   .then(res => res.json())
@@ -25,7 +25,7 @@ const handleMakeAdmin = user => {
     console.log(data);
     if (data.modifiedCount) {
       // Fetch users data again
-      fetch('http://localhost:5000/users')
+      fetch('https://server-six-lemon.vercel.app/users')
         .then(res => res.json())
         .then(data => setUsers(data));
 

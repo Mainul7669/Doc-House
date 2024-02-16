@@ -47,7 +47,7 @@ const SignUp = () => {
           email: email,
           image: image,
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://server-six-lemon.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
