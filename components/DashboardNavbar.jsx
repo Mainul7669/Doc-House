@@ -178,6 +178,18 @@ const DashboardNavbar = () => {
                 <li>
                   <Link
                     className={`link ${
+                      pathname === "/dashboard/myappointments"
+                        ? "active"
+                        : "no-underline hover:text-black hover:font-bold"
+                    }`}
+                    href="/dashboard/myappointments"
+                  >
+                    My Appointments
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    className={`link ${
                       pathname === "/dashboard/myhistory"
                         ? "active"
                         : "no-underline hover:text-black hover:font-bold"
